@@ -1,6 +1,12 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
+const config: {
+  darkMode: string;
+  plugins: any[];
+  theme: { extend: { backgroundImage: { "gradient-conic": string; "gradient-radial": string } } };
+  content: string[]
+} = {
+  darkMode: 'class',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,6 +21,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
 export default config;
