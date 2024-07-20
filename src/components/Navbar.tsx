@@ -1,0 +1,260 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import ThemeToggle from '@/components/ThemeToggle';
+import Link from 'next/link';
+
+export default function Navbar() {
+    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+    const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+    const [isSticky, setIsSticky] = useState(false);
+
+    const navbarRef = useRef(null);
+    const logoRef = useRef(null);
+    const backToTopRef = useRef(null);
+    const themeSwitcherRef = useRef(null);
+
+    // Handle scroll event
+    useEffect(() => {
+        const handleScroll = () => {
+            const udHeader = navbarRef.current;
+            const sticky = udHeader?.offsetTop || 0;
+
+            if (window.pageYOffset > sticky) {
+                setIsSticky(true);
+            } else {
+                setIsSticky(false);
+            }
+
+            // WE MIGHT NEED THIS IF WE HAVE TWO LOGOS -- ONE FOR LIGHT THEME AND ONE FOR DARK
+            // if (logoRef.current) {
+            //     logoRef.current.src = document.documentElement.classList.contains('dark')
+            //         ? (isSticky ? "assets/images/logo/logo-white.svg" : "assets/images/logo/logo-white.svg")
+            //         : (isSticky ? "assets/images/logo/logo.svg" : "assets/images/logo/logo-white.svg");
+            // }
+
+            if (backToTopRef.current) {
+                backToTopRef.current.style.display = window.scrollY > 50 ? "flex" : "none";
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isSticky]);
+
+    // Handle theme switching
+    useEffect(() => {
+        const themeSwitcher = themeSwitcherRef.current;
+        const userTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const applyTheme = () => {
+            if (userTheme === 'dark' || (!userTheme && systemTheme)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        };
+
+        const switchTheme = () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        };
+
+        applyTheme();
+        if (themeSwitcher) {
+            themeSwitcher.addEventListener('click', switchTheme);
+        }
+
+        return () => {
+            if (themeSwitcher) {
+                themeSwitcher.removeEventListener('click', switchTheme);
+            }
+        };
+    }, []);
+
+    // Toggle navbar
+    const handleToggle = () => {
+        setIsNavbarOpen(!isNavbarOpen);
+    };
+
+    // Toggle submenu
+    const handleSubmenuToggle = () => {
+        setIsSubmenuOpen(!isSubmenuOpen);
+    };
+
+    // Scroll to top function
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    return (
+        <header
+            ref={navbarRef}
+            className={`ud-header fixed left-0 top-0 w-full z-40 transition-all duration-300 ${isSticky ? 'bg-gray-800 bg-opacity-80 shadow-lg' : 'bg-transparent'}`}
+        >
+            <div className="relative flex justify-between items-center w-full">
+                <div className="max-w-full px-4">
+                    <Link className="p-5 font-bold text-white" href="/">
+                        Quick Launch Designs
+                    </Link>
+                </div>
+                <div className="flex items-center justify-between px-4">
+                    <div>
+                        <button
+                            id="navbarToggler"
+                            className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${isNavbarOpen ? 'navbarTogglerActive' : ''}`}
+                            onClick={handleToggle}
+                        >
+                            <span className="relative my-[6px] block h-[2px] w-[30px] bg-black dark:bg-white"></span>
+                            <span className="relative my-[6px] block h-[2px] w-[30px] bg-black dark:bg-white"></span>
+                            <span className="relative my-[6px] block h-[2px] w-[30px] bg-black dark:bg-white"></span>
+                        </button>
+                        <nav
+                            id="navbarCollapse"
+                            className={`absolute right-4 top-full ${isNavbarOpen ? 'block' : 'hidden'} w-full max-w-[250px] rounded-lg py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none xl:px-6`}
+                        >
+                            <ul className="block lg:flex 2xl:ml-20">
+                                <li className="group relative">
+                                    <a
+                                        href="#home"
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                    >
+                                        Home
+                                    </a>
+                                </li>
+                                <li className="group relative">
+                                    <a
+                                        href="#about"
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                    >
+                                        About
+                                    </a>
+                                </li>
+                                <li className="group relative">
+                                    <a
+                                        href="#pricing"
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                    >
+                                        Pricing
+                                    </a>
+                                </li>
+                                <li className="group relative">
+                                    <a
+                                        href="#team"
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                    >
+                                        Team
+                                    </a>
+                                </li>
+                                <li className="group relative">
+                                    <a
+                                        href="#contact"
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                    >
+                                        Contact
+                                    </a>
+                                </li>
+                                <li className="group relative">
+                                    <a
+                                        href="blog-grids.html"
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                    >
+                                        Blog
+                                    </a>
+                                </li>
+                                <li className="submenu-item group relative">
+                                    <a
+                                        className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70"
+                                        onClick={handleSubmenuToggle}
+                                    >
+                                        Pages
+                                        <svg
+                                            className="ml-2 fill-current"
+                                            width="16"
+                                            height="20"
+                                            viewBox="0 0 16 20"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M7.99999 14.9C7.84999 14.9 7.72499 14.85 7.59999 14.75L1.84999 9.10005C1.62499 8.87505 1.62499 8.52505 1.84999 8.30005C2.07499 8.07505 2.42499 8.07505 2.64999 8.30005L7.99999 13.525L13.35 8.25005C13.575 8.02505 13.925 8.02505 14.15 8.25005C14.375 8.47505 14.375 8.82505 14.15 9.05005L8.39999 14.7C8.27499 14.825 8.14999 14.9 7.99999 14.9Z"
+                                            />
+                                        </svg>
+                                    </a>
+                                    <div
+                                        className={`submenu ${isSubmenuOpen ? 'block' : 'hidden'} relative left-0 top-full w-[250px] rounded-sm bg-white dark:bg-black p-4 transition-[top] duration-300 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full`}
+                                    >
+                                        <a
+                                            href="about.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            About Page
+                                        </a>
+                                        <a
+                                            href="pricing.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            Pricing Page
+                                        </a>
+                                        <a
+                                            href="contact.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            Contact Page
+                                        </a>
+                                        <a
+                                            href="blog-grids.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            Blog Grid Page
+                                        </a>
+                                        <a
+                                            href="blog-details.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            Blog Details Page
+                                        </a>
+                                        <a
+                                            href="signup.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            Sign Up Page
+                                        </a>
+                                        <a
+                                            href="signin.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            Sign In Page
+                                        </a>
+                                        <a
+                                            href="404.html"
+                                            className="block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary"
+                                        >
+                                            404 Page
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div className="flex items-center justify-end pr-16 lg:pr-0">
+                        <ThemeToggle ref={themeSwitcherRef} />
+                    </div>
+                </div>
+            </div>
+            <div
+                ref={backToTopRef}
+                className="fixed bottom-4 right-4 p-2 bg-black text-white rounded-full cursor-pointer shadow-lg"
+                onClick={scrollToTop}
+            >
+                <span className="text-xl">↑</span>
+            </div>
+        </header>
+    );
+}
