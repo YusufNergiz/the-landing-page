@@ -1,6 +1,6 @@
 import Image from "next/image";
-import aboutImage1 from '../images/about-image-01.jpg'
-import aboutImage2 from '../images/about-image-02.jpg'
+import aboutImage1 from '../../images/about-image-01.jpg'
+import aboutImage2 from '../../images/about-image-02.jpg'
 
 export default function About() {
     return (

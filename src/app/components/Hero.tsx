@@ -1,8 +1,14 @@
+'use client'
+
 import HeroDots from "@/svgs/HeroDots";
 import Image from "next/image";
-import heroImage from '../images/hero-image.jpg'
+import heroImage from '../../images/hero-image.jpg'
+import {useTranslation} from "react-i18next";
 
 export default function Hero() {
+
+    const { t } = useTranslation();
+
     return (
         <div
             id="home"
@@ -18,13 +24,12 @@ export default function Hero() {
                             <h1
                                 className="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]"
                             >
-                                Open-Source Web Template for SaaS, Startup, Apps, and More
+                                {t('heading')}
                             </h1>
                             <p
                                 className="mx-auto mb-9 max-w-[600px] text-base font-medium text-white sm:text-lg sm:leading-[1.44]"
                             >
-                                Multidisciplinary Web Template Built with Your Favourite
-                                Technology - HTML Bootstrap, Tailwind and React NextJS.
+                                {t("subheading")}
                             </p>
                             <ul
                                 className="mb-10 flex flex-wrap items-center justify-center gap-5"
@@ -58,7 +63,7 @@ export default function Hero() {
                                             </g>
                                             <defs>
                                                 <clipPath id="clip0_2005_10818">
-                                                    <rect width="24" height="24" fill="white" />
+                                                    <rect width="24" height="24" fill="white"/>
                                                 </clipPath>
                                             </defs>
                                         </svg>
@@ -233,10 +238,10 @@ export default function Hero() {
                                 />
                             </div>
                             <div className="absolute -left-9 bottom-0 z-[-1]">
-                                <HeroDots />
+                                <HeroDots/>
                             </div>
                             <div className="absolute -right-6 -top-6 z-[-1]">
-                                <HeroDots />
+                                <HeroDots/>
                             </div>
                         </div>
                     </div>
