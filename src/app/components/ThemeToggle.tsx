@@ -1,9 +1,9 @@
 'use client'
 
-import {forwardRef, useEffect, useState} from "react";
-import {useTheme} from "next-themes";
+import { forwardRef, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
-const ThemeToggle = forwardRef((props, ref) => {
+const ThemeToggle = forwardRef(({ isSticky, ...props }, ref) => {
     // Function to toggle theme
     const handleToggle = () => {
         if (document.documentElement.classList.contains('dark')) {
@@ -15,19 +15,19 @@ const ThemeToggle = forwardRef((props, ref) => {
         }
     };
 
-    const { theme, setTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true)
-    }, [])
+        setMounted(true);
+    }, []);
 
-    if (!mounted) return null
+    if (!mounted) return null;
 
     return (
         <label
             htmlFor="themeSwitcher"
-            className="inline-flex cursor-pointer items-center"
+            className={`inline-flex cursor-pointer items-center ${isSticky ? 'sticky-class' : ''}`}
             aria-label="themeSwitcher"
             name="themeSwitcher"
         >
@@ -39,7 +39,7 @@ const ThemeToggle = forwardRef((props, ref) => {
                 checked={theme === 'dark'}
                 onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             />
-            <span className="block text-white dark:hidden">
+            <span className={`block ${isSticky ? 'text-black dark:text-white' : 'text-white'} dark:hidden`}>
                 <svg
                     className="fill-current"
                     width="24"

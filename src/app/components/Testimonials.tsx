@@ -1,10 +1,10 @@
 'use client'
 
 import React, { useState } from 'react';
-import authorImage1 from '../images/author-01.jpg'
-import authorImage2 from '../images/author-02.jpg'
-import authorImage3 from '../images/author-03.jpg'
-import iconStarImage from '../images/icon-star.svg'
+import authorImage1 from '../../images/author-01.jpg'
+import authorImage2 from '../../images/author-02.jpg'
+import authorImage3 from '../../images/author-03.jpg'
+import iconStarImage from '../../images/icon-star.svg'
 import Image from "next/image";
 
 

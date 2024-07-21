@@ -1,7 +1,7 @@
 import Image from "next/image";
-import blogImage1 from '../images/blog-01.jpg'
-import blogImage2 from '../images/blog-02.jpg'
-import blogImage3 from '../images/blog-03.jpg'
+import blogImage1 from '../../images/blog-01.jpg'
+import blogImage2 from '../../images/blog-02.jpg'
+import blogImage3 from '../../images/blog-03.jpg'
 
 
 export default function Blog() {
