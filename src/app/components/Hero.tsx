@@ -4,11 +4,11 @@ import HeroDots from "@/svgs/HeroDots";
 import Image from "next/image";
 import heroImage from '../../images/hero-image.jpg'
 import {useTranslation} from "react-i18next";
+import {useTranslations} from "use-intl";
 
 export default function Hero() {
 
-    const { t } = useTranslation();
-
+    const t = useTranslations();
     return (
         <div
             id="home"
@@ -24,12 +24,12 @@ export default function Hero() {
                             <h1
                                 className="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]"
                             >
-                                {t('heading')}
+                                {t('hero.heading')}
                             </h1>
                             <p
                                 className="mx-auto mb-9 max-w-[600px] text-base font-medium text-white sm:text-lg sm:leading-[1.44]"
                             >
-                                {t("subheading")}
+                                {t("hero.subheading")}
                             </p>
                             <ul
                                 className="mb-10 flex flex-wrap items-center justify-center gap-5"

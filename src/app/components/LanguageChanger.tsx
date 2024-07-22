@@ -5,39 +5,20 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import i18nConfig from '@/../i18nConfig';
+import {Locale} from "@/locales";
+import {useLocale} from "use-intl";
 
 interface LanguageChangerProps {
     isSticky?: boolean;
 }
 
 const LanguageChanger: React.FC<LanguageChangerProps> = ({ isSticky }) => {
-    const { i18n } = useTranslation();
-    const currentLocale = i18n.language;
     const router = useRouter();
-    const currentPathname = usePathname();
+    const locale = useLocale() as Locale;
     const [showDropdown, setShowDropdown] = useState(false);
 
-    const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const newLocale = e.currentTarget.value;
-
-        // Set cookie for next-i18n-router
-        const days = 30;
-        const date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        const expires = date.toUTCString();
-        document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
-
-        // Redirect to the new locale path
-        if (
-            currentLocale === i18nConfig.defaultLocale
-        ) {
-            router.push('/' + newLocale + currentPathname);
-        } else {
-            router.push(
-                currentPathname.replace(`/${currentLocale}`, `/${newLocale}`)
-            );
-        }
-
+    const handleChange = (newLocale: Locale) => {
+        document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
         router.refresh();
         setShowDropdown(false);
     };
@@ -50,21 +31,21 @@ const LanguageChanger: React.FC<LanguageChangerProps> = ({ isSticky }) => {
                 className={`language-btn ${isSticky ? 'text-black dark:text-white' : 'text-white'}`}
                 onClick={toggleDropdown}
             >
-                {currentLocale.toUpperCase()}
+                {locale.toUpperCase()}
             </button>
             {showDropdown && (
                 <div className="dropdown">
                     <button
                         className="dropdown-item"
                         value="en"
-                        onClick={handleChange}
+                        onClick={() => handleChange("en")}
                     >
                         EN
                     </button>
                     <button
                         className="dropdown-item"
                         value="pl"
-                        onClick={handleChange}
+                        onClick={() => handleChange("pl")}
                     >
                         PL
                     </button>
