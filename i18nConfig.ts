@@ -1,6 +1,9 @@
+// i18nConfig.ts
+
 const i18nConfig = {
     locales: ['en', 'pl'],
-    defaultLocale: 'en'
-}
+    defaultLocale: 'en',
+    localeDetection: false,
+};
 
-module.exports = i18nConfig
+export default i18nConfig;

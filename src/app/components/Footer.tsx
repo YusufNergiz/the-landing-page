@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
     return (
         <footer
@@ -12,11 +14,11 @@ export default function Footer() {
                                 href="javascript:void(0)"
                                 className="mb-6 inline-block max-w-[160px]"
                             >
-                                <img
-                                    src="assets/images/logo/logo-white.svg"
-                                    alt="logo"
-                                    className="max-w-full"
-                                />
+                                {/*<Image*/}
+                                {/*    src="assets/images/logo/logo-white.svg"*/}
+                                {/*    alt="logo"*/}
+                                {/*    className="max-w-full"*/}
+                                {/*/>*/}
                             </a>
                             <p className="mb-8 max-w-[270px] text-base text-gray-7">
                                 We create digital experiences for brands and companies by using
@@ -228,10 +230,10 @@ export default function Footer() {
                                     className="group flex items-center gap-[22px]"
                                 >
                                     <div className="overflow-hidden rounded">
-                                        <img
-                                            src="./assets/images/blog/blog-footer-01.jpg"
-                                            alt="blog"
-                                        />
+                                        {/*<Image*/}
+                                        {/*    src="./assets/images/blog/blog-footer-01.jpg"*/}
+                                        {/*    alt="blog"*/}
+                                        {/*/>*/}
                                     </div>
                                     <span
                                         className="max-w-[180px] text-base text-gray-7 group-hover:text-white"
@@ -244,10 +246,10 @@ export default function Footer() {
                                     className="group flex items-center gap-[22px]"
                                 >
                                     <div className="overflow-hidden rounded">
-                                        <img
-                                            src="./assets/images/blog/blog-footer-02.jpg"
-                                            alt="blog"
-                                        />
+                                        {/*<Image*/}
+                                        {/*    src="./assets/images/blog/blog-footer-02.jpg"*/}
+                                        {/*    alt="blog"*/}
+                                        {/*/>*/}
                                     </div>
                                     <span
                                         className="max-w-[180px] text-base text-gray-7 group-hover:text-white"
@@ -313,11 +315,11 @@ export default function Footer() {
 
             <div>
         <span className="absolute left-0 top-0 z-[-1]">
-          <img src="assets/images/footer/shape-1.svg" alt=""/>
+          {/*<Image src="assets/images/footer/shape-1.svg" alt=""/>*/}
         </span>
 
                 <span className="absolute bottom-0 right-0 z-[-1]">
-          <img src="assets/images/footer/shape-3.svg" alt=""/>
+          {/*<Image src="assets/images/footer/shape-3.svg" alt=""/>*/}
         </span>
 
                 <span className="absolute right-0 top-0 z-[-1]">

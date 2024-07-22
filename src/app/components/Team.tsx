@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Team() {
     return (
         <section
@@ -29,8 +31,10 @@ export default function Team() {
                             className="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none"
                         >
                             <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                                <img
-                                    src="./assets/images/team/team-01.png"
+                                <Image
+                                    height={1}
+                                    width={1}
+                                    src={'./assets/images/team/team-01.png'}
                                     alt="team image"
                                     className="h-[120px] w-[120px] rounded-full"
                                 />
@@ -341,7 +345,9 @@ export default function Team() {
                             className="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none"
                         >
                             <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                                <img
+                                <Image
+                                    height={1}
+                                    width={1}
                                     src="https://cdn.tailgrids.com/1.0/assets/images/team/image-07/image-02.png"
                                     alt="team image"
                                     className="h-[120px] w-[120px] rounded-full"
@@ -545,7 +551,9 @@ export default function Team() {
                             className="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none"
                         >
                             <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                                <img
+                                <Image
+                                    height={1}
+                                    width={1}
                                     src="https://cdn.tailgrids.com/1.0/assets/images/team/image-07/image-03.png"
                                     alt="team image"
                                     className="h-[120px] w-[120px] rounded-full"
@@ -749,7 +757,9 @@ export default function Team() {
                             className="group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none"
                         >
                             <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
-                                <img
+                                <Image
+                                    height={1}
+                                    width={1}
                                     src="https://cdn.tailgrids.com/1.0/assets/images/team/image-07/image-04.png"
                                     alt="team image"
                                     className="h-[120px] w-[120px] rounded-full"

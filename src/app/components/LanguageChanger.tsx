@@ -1,20 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import i18nConfig from '@/../i18nConfig';
 
-export default function LanguageChanger({ isSticky }) {
+interface LanguageChangerProps {
+    isSticky?: boolean;
+}
+
+const LanguageChanger: React.FC<LanguageChangerProps> = ({ isSticky }) => {
     const { i18n } = useTranslation();
     const currentLocale = i18n.language;
     const router = useRouter();
     const currentPathname = usePathname();
     const [showDropdown, setShowDropdown] = useState(false);
 
-    const handleChange = e => {
-        const newLocale = e.target.value;
+    const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const newLocale = e.currentTarget.value;
 
         // Set cookie for next-i18n-router
         const days = 30;
@@ -25,8 +29,7 @@ export default function LanguageChanger({ isSticky }) {
 
         // Redirect to the new locale path
         if (
-            currentLocale === i18nConfig.defaultLocale &&
-            !i18nConfig.prefixDefault
+            currentLocale === i18nConfig.defaultLocale
         ) {
             router.push('/' + newLocale + currentPathname);
         } else {
@@ -106,3 +109,5 @@ export default function LanguageChanger({ isSticky }) {
         </div>
     );
 }
+
+export default LanguageChanger;

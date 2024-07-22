@@ -20,7 +20,7 @@ export default function Contact() {
                                 <h2
                                     className="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white"
                                 >
-                                    Let's talk about your problem.
+                                    Lets talk about your problem.
                                 </h2>
                             </div>
                             <div className="mb-12 flex flex-wrap justify-between lg:mb-0">
@@ -140,7 +140,7 @@ export default function Contact() {
                                     >
                                     <textarea
                                         name="message"
-                                        rows="1"
+                                        rows={1}
                                         placeholder="type your message here"
                                         className="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                                     ></textarea>

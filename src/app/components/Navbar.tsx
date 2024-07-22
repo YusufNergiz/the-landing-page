@@ -4,20 +4,21 @@ import { useState, useEffect, useRef } from 'react';
 import ThemeToggle from '@/app/components/ThemeToggle';
 import Link from 'next/link';
 import LanguageChanger from "@/app/components/LanguageChanger";
-import {useTranslation} from "react-i18next";
-import {NavbarItems} from "@/app/utils/Navbar/navbar-items";
+import { useTranslation } from "react-i18next";
+import { NavbarItems } from "@/app/utils/Navbar/navbar-items";
+
+type RefElement = HTMLDivElement | null;
 
 export default function Navbar() {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
 
-    const navbarRef = useRef(null);
-    const logoRef = useRef(null);
-    const backToTopRef = useRef(null);
-    const themeSwitcherRef = useRef(null);
+    const navbarRef = useRef<RefElement>(null);
+    const backToTopRef = useRef<HTMLDivElement | null>(null);
+    const themeSwitcherRef = useRef<HTMLDivElement | null>(null);
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
 
     // Handle scroll event
     useEffect(() => {
@@ -207,8 +208,8 @@ export default function Navbar() {
                 </div>
                 <div
                     className="flex items-center justify-end w-[200px] pr-16 lg:pr-0">
-                    <ThemeToggle ref={themeSwitcherRef} isSticky={isSticky}/>
-                    <LanguageChanger isSticky={isSticky}/>
+                    <ThemeToggle ref={themeSwitcherRef} isSticky={isSticky} />
+                    <LanguageChanger isSticky={isSticky} />
                 </div>
             </div>
 
