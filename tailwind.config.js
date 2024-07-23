@@ -1,4 +1,4 @@
-const config = {
+const config= {
   darkMode: 'class',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
