@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import i18nConfig from '@/../i18nConfig';
+import Cookies from 'js-cookie';
 import {Locale} from "@/locales";
 import {useLocale} from "use-intl";
 
@@ -18,7 +16,12 @@ const LanguageChanger: React.FC<LanguageChangerProps> = ({ isSticky }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const handleChange = (newLocale: Locale) => {
-        document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+        Cookies.set('NEXT_LOCALE', newLocale, {
+            path: '/',
+            expires: 365,
+            sameSite: 'Lax',
+            secure: window.location.protocol === 'https:'
+        });
         router.refresh();
         setShowDropdown(false);
     };

@@ -1,4 +1,10 @@
-export default function FaqDots({ color }) {
+import React from "react";
+
+interface FaqDotsProps {
+    color: string; // Define the type for color (string in this case)
+}
+
+const FaqDots: React.FC<FaqDotsProps> = ({ color }) => {
     return (
         <svg
             width="48"
@@ -290,3 +296,5 @@ export default function FaqDots({ color }) {
         </svg>
     );
 }
+
+export default FaqDots;
